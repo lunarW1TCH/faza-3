@@ -7,6 +7,19 @@ const globalCss = defineGlobalStyles({
   'html, body': {
     fontFamily: 'var(--font-inter)',
   },
+  html: {
+    minH: '100%',
+  },
+  body: {
+    display: 'flex',
+    flexDirection: 'column',
+    minH: '100vh',
+  },
+  main: {
+    display: 'flex',
+    flexDirection: 'column',
+    flexGrow: 1,
+  },
 });
 
 export default globalCss;

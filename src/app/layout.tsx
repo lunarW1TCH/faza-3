@@ -1,8 +1,10 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
-import type { Props } from '@/types';
-import { panda } from '@panda/jsx';
+import type { Props } from '~/types';
+import { styled } from '~panda/jsx';
+import Navigation from '~/components/layout/navigation';
+import Footer from '~/components/layout/footer';
 
 const inter = Inter({
   subsets: ['latin-ext'],
@@ -19,11 +21,13 @@ const Root = (props: Props) => {
   const { children } = props;
 
   return (
-    <panda.html lang='en' className={inter.variable}>
-      <body>
-        <panda.main>{children}</panda.main>
-      </body>
-    </panda.html>
+    <styled.html lang='en' className={inter.variable}>
+      <styled.body>
+        <Navigation />
+        <styled.main>{children}</styled.main>
+        <Footer />
+      </styled.body>
+    </styled.html>
   );
 };
 

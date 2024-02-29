@@ -1,7 +1,12 @@
-import { panda } from '@panda/jsx';
+import { Button } from '~/components/ui/button';
+import { VStack } from '~panda/jsx';
 
 const Home = () => {
-  return <panda.main>todo</panda.main>;
+  return (
+    <VStack>
+      <Button variant='outline'>Miau</Button>
+    </VStack>
+  );
 };
 
 export default Home;
