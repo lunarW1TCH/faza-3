@@ -7,17 +7,18 @@
     "dev": "rm -rf .next && next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "setup": "rm -rf .next && rm -rf node_modules && bun install && bun panda codegen --clean"
   },
   "dependencies": {
     "@ark-ui/react": "^2.2.2",
-    "next": "14.1.0",
+    "next": "^14.2.2",
     "react": "^18",
     "react-dom": "^18"
   },
   "devDependencies": {
-    "@pandacss/dev": "^0.31.0",
-    "@park-ui/panda-preset": "^0.36.0",
+    "@pandacss/dev": "^0.37.2",
+    "@park-ui/panda-preset": "^0.37.0",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",

@@ -24,7 +24,15 @@ const Root = (props: Props) => {
     <styled.html lang='en' className={inter.variable}>
       <styled.body>
         <Navigation />
-        <styled.main>{children}</styled.main>
+        <styled.main
+          display='flex'
+          flexDir='column'
+          justifyContent='center'
+          alignItems='center'
+          bgColor='bg.subtle'
+        >
+          {children}
+        </styled.main>
         <Footer />
       </styled.body>
     </styled.html>
