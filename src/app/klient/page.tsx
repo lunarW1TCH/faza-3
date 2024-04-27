@@ -2,17 +2,17 @@
 
 import Image from 'next/image';
 import { useRef, useState } from 'react';
-import { VStack, styled } from '~panda/jsx';
-import { button, input } from '~panda/recipes';
 import clientCode from '~/../public/client.png';
 import { css } from '~panda/css';
+import { styled, VStack } from '~panda/jsx';
+import { button, input } from '~panda/recipes';
 
 const Page = () => {
   const [name, setName] = useState('');
   const nameRef = useRef<HTMLInputElement | null>(null);
 
   return (
-    <VStack my='4'>
+    <VStack margin='4'>
       <styled.input
         w='200px'
         className={input()}
@@ -47,8 +47,14 @@ const Page = () => {
           rounded: 'md',
         })}
       />
-      <styled.p fontSize='12px' fontStyle='italic' color='fg.muted'>
-        Kod implementujący powyższą funkcjonalność
+      <styled.p
+        fontSize='12px'
+        fontStyle='italic'
+        color='fg.muted'
+        textAlign='center'
+      >
+        Kod implementujący powyższą funkcjonalność z wyłączeniem zawartości
+        poniżej horyzontalnej linii ({'<hr/>'})
       </styled.p>
     </VStack>
   );
