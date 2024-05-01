@@ -1,16 +1,38 @@
 'use client';
 
-import { useParams, usePathname } from 'next/navigation';
+import { usePathname } from 'next/navigation';
+import { useEffect, useState } from 'react';
 import useSWR from 'swr';
-import { getStrategApiUrl } from '~/lib/api';
+import { fetcher, getStrategApiUrl, voivodeships } from '~/lib/api';
 import { styled, VStack } from '~panda/jsx';
-import { card, link } from '~panda/recipes';
+import { card } from '~panda/recipes';
 
+import BarGraph from './bar-graph';
+
+import type { StrategResponseBody, VoivodeshipID } from '~/types/api';
 const FetchContainer = () => {
   const pathname = usePathname() as AppPathname;
-  const mutateKey = ``;
+  const mutateKey = getStrategApiUrl(1659, 2142);
 
-  useSWR(getStrategApiUrl(1659, 2142));
+  const [graphData, setGraphData] = useState<GraphData>([]);
+
+  const { data, isLoading } = useSWR<StrategResponseBody<string>>(
+    mutateKey,
+    fetcher
+  );
+
+  useEffect(() => {
+    if (isLoading || !data) return;
+
+    const data2022 = Object.entries(data?.real_values['2022']).map((entry) => ({
+      name: voivodeships[entry[0] as VoivodeshipID],
+      value: parseFloat(entry[1]),
+    }));
+
+    setGraphData(data2022);
+  }, [isLoading, data]);
+
+  if (isLoading) return 'Loading...';
 
   return (
     <VStack>
@@ -21,7 +43,14 @@ const FetchContainer = () => {
           </styled.h3>
           <styled.p className={cardRecipe.description}></styled.p>
         </styled.div>
-        <styled.div className={cardRecipe.body}></styled.div>
+        <styled.div className={cardRecipe.body}>
+          {/* {displayedData.map((d) => (
+            <styled.div key={d.name}>
+              {d.name}: {d.value}
+            </styled.div>
+          ))} */}
+          <BarGraph graphData={graphData} />
+        </styled.div>
       </styled.div>
     </VStack>
   );
@@ -44,3 +73,8 @@ const getTitle = (pathname: AppPathname) => {
 
 type Path = 'todo1' | 'todo2' | 'todo3';
 type AppPathname = `/${Path}`;
+
+export type GraphData = {
+  name: string;
+  value: number;
+}[];
