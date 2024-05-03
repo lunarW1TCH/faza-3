@@ -13,17 +13,19 @@ const BarGraph = (props: BarGraphProps) => {
   return (
     <styled.div
       w='480px'
+      smDown={{
+        maxW: '350px',
+      }}
       h='600px'
-      bgColor='red/20'
       border='1px solid'
+      rounded='md'
       borderColor='border.default'
       display='flex'
       flexDir='column'
     >
       <styled.div
         w='100%'
-        h='400px'
-        bgColor='white'
+        h='600px'
         display='flex'
         justifyContent='space-evenly'
         alignItems='flex-end'

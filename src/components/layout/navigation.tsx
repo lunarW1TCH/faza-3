@@ -1,7 +1,10 @@
+import { Home } from 'lucide-react';
+import NextLink from 'next/link';
 import { styled } from '~panda/jsx';
 import { button } from '~panda/recipes';
+
+import { Button } from '../ui/button';
 import { Link } from '../ui/link';
-import NextLink from 'next/link';
 
 const Navigation = () => {
   return (
@@ -15,58 +18,53 @@ const Navigation = () => {
       borderBottomColor='border.subtle'
       gap='2'
     >
-      <Link
-        w='96px'
+      <Button
         textAlign='center'
-        textStyle='2xl'
+        textStyle='sm'
         fontWeight='light'
         asChild
-        className={button({ variant: 'ghost' })}
+        variant='ghost'
       >
         <NextLink style={{ textAlign: 'center' }} href='/'>
-          Home
+          <Home />
         </NextLink>
-      </Link>
-      <Link
-        w='96px'
+      </Button>
+      <Button
         textAlign='center'
-        textStyle='2xl'
+        textStyle='sm'
         fontWeight='light'
         asChild
-        className={button({ variant: 'ghost' })}
+        variant='ghost'
       >
-        <NextLink href='/todo1'>Todo 1</NextLink>
-      </Link>
-      <Link
-        w='96px'
+        <NextLink href='/indicator-1'>Wskaźnik 1</NextLink>
+      </Button>
+      <Button
         textAlign='center'
-        textStyle='2xl'
+        textStyle='sm'
         fontWeight='light'
         asChild
-        className={button({ variant: 'ghost' })}
+        variant='ghost'
       >
-        <NextLink href='/todo2'>Todo 2</NextLink>
-      </Link>
-      <Link
-        w='96px'
+        <NextLink href='/indicator-2'>Wskaźnik 2</NextLink>
+      </Button>
+      <Button
         textAlign='center'
-        textStyle='2xl'
+        textStyle='sm'
         fontWeight='light'
         asChild
-        className={button({ variant: 'ghost' })}
+        variant='ghost'
       >
-        <NextLink href='/todo3'>Todo 3</NextLink>
-      </Link>
-      <Link
-        w='96px'
+        <NextLink href='/indicator-3'>Wskaźnik 3</NextLink>
+      </Button>
+      <Button
         textAlign='center'
-        textStyle='2xl'
+        textStyle='sm'
         fontWeight='light'
         asChild
-        className={button({ variant: 'ghost' })}
+        variant='ghost'
       >
         <NextLink href='/klient'>Klient</NextLink>
-      </Link>
+      </Button>
     </styled.nav>
   );
 };

@@ -1,4 +1,5 @@
 import { styled } from '~panda/jsx';
+
 import { Text } from '../ui/text';
 
 const Footer = () => {
@@ -9,7 +10,7 @@ const Footer = () => {
       borderTop='1px solid'
       borderTopColor='border.subtle'
     >
-      <Text as='span'>&copy; 2024 Adrian Żegnałek</Text>
+      <styled.span fontSize='sm'>&copy; 2024 Adrian Żegnałek</styled.span>
     </styled.footer>
   );
 };

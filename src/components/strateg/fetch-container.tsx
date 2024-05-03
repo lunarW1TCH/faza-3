@@ -2,6 +2,7 @@
 
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import dummyData from 'src/dummy-data.json';
 import useSWR from 'swr';
 import { fetcher, getStrategApiUrl, voivodeships } from '~/lib/api';
 import { styled, VStack } from '~panda/jsx';
@@ -9,36 +10,63 @@ import { card } from '~panda/recipes';
 
 import BarGraph from './bar-graph';
 
-import type { StrategResponseBody, VoivodeshipID } from '~/types/api';
-const FetchContainer = () => {
+import type {
+  StrategApiURL,
+  StrategResponseBody,
+  VoivodeshipID,
+} from '~/types/api';
+const FetchContainer = (props: FetchContainerProps) => {
+  const { url } = props;
   const pathname = usePathname() as AppPathname;
-  const mutateKey = getStrategApiUrl(1659, 2142);
 
+  //! DUMMY DATA
+  // const [graphData, setGraphData] = useState<GraphData>(
+  //   Object.entries(dummyData.real_values[2021]).map((entry) => ({
+  //     name: voivodeships[entry[0] as VoivodeshipID],
+  //     value: parseFloat(entry[1]),
+  //   }))
+  // );
+
+  // ! REAL DATA
   const [graphData, setGraphData] = useState<GraphData>([]);
-
   const { data, isLoading } = useSWR<StrategResponseBody<string>>(
-    mutateKey,
-    fetcher
+    url,
+    fetcher,
+    {
+      isPaused: () => false,
+    }
   );
 
   useEffect(() => {
     if (isLoading || !data) return;
 
-    const data2022 = Object.entries(data?.real_values['2022']).map((entry) => ({
+    const data2021 = Object.entries(data?.real_values['2021']).map((entry) => ({
       name: voivodeships[entry[0] as VoivodeshipID],
       value: parseFloat(entry[1]),
     }));
 
-    setGraphData(data2022);
+    setGraphData(data2021);
   }, [isLoading, data]);
 
   if (isLoading) return 'Loading...';
+  //! REAL DATA
 
   return (
     <VStack>
-      <styled.div className={cardRecipe.root} minW='300px'>
+      <styled.div
+        className={cardRecipe.root}
+        minW='300px'
+        maxW='530px'
+        smDown={{
+          maxW: '400px',
+        }}
+      >
         <styled.div className={cardRecipe.header}>
-          <styled.h3 className={cardRecipe.title}>
+          <styled.h3
+            className={cardRecipe.title}
+            textWrap='wrap'
+            fontSize='16px'
+          >
             {getTitle(pathname)}
           </styled.h3>
           <styled.p className={cardRecipe.description}></styled.p>
@@ -62,19 +90,23 @@ const cardRecipe = card();
 
 const getTitle = (pathname: AppPathname) => {
   switch (pathname) {
-    case '/todo1':
-      return 'TODO 1';
-    case '/todo2':
-      return 'TODO 2';
-    case '/todo3':
-      return 'TODO 3';
+    case '/indicator-1':
+      return 'Odsetek gospodarstw domowych posiadających szerokopasmowy dostęp do Internetu w domu - 2021';
+    case '/indicator-2':
+      return 'Odsetek osób korzystających z Internetu w celu wyszukiwania informacji o towarach lub usługach - 2021';
+    case '/indicator-3':
+      return 'Przedsiębiorstwa (powyżej 9 pracujących) posiadające własną stronę internetową - 2021';
   }
 };
 
-type Path = 'todo1' | 'todo2' | 'todo3';
+type Path = 'indicator-1' | 'indicator-2' | 'indicator-3';
 type AppPathname = `/${Path}`;
 
 export type GraphData = {
   name: string;
   value: number;
 }[];
+
+type FetchContainerProps = {
+  url: StrategApiURL;
+};

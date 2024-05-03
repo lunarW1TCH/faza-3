@@ -26,4 +26,9 @@ export const getStrategApiUrl = (
   `https://strateg.stat.gov.pl/api/indicators/${indicator}/dimensions/${dimension}?level_id=2`;
 
 export const fetcher = (url: string) =>
-  fetch(url).then((response) => response.json());
+  fetch(url, {
+    headers: {
+      'Content-Type': 'application/json',
+      'X-API-KEY': process.env.STRATEG_API_KEY ?? '',
+    },
+  }).then((response) => response.json());
