@@ -2,13 +2,14 @@
 
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import dummyData from 'src/dummy-data.json';
 import useSWR from 'swr';
-import { fetcher, getStrategApiUrl, voivodeships } from '~/lib/api';
+import { fetcher, voivodeships } from '~/lib/api';
 import { styled, VStack } from '~panda/jsx';
 import { card } from '~panda/recipes';
 
+import LoadingFallback from '../loading-fallback';
 import BarGraph from './bar-graph';
+import ErrorFallback from './error-fallback';
 
 import type {
   StrategApiURL,
@@ -29,7 +30,7 @@ const FetchContainer = (props: FetchContainerProps) => {
 
   // ! REAL DATA
   const [graphData, setGraphData] = useState<GraphData>([]);
-  const { data, isLoading } = useSWR<StrategResponseBody<string>>(
+  const { data, isLoading, error } = useSWR<StrategResponseBody<string>>(
     url,
     fetcher,
     {
@@ -38,7 +39,7 @@ const FetchContainer = (props: FetchContainerProps) => {
   );
 
   useEffect(() => {
-    if (isLoading || !data) return;
+    if (isLoading || !data || error || 'message' in data) return;
 
     const data2021 = Object.entries(data?.real_values['2021']).map((entry) => ({
       name: voivodeships[entry[0] as VoivodeshipID],
@@ -46,9 +47,10 @@ const FetchContainer = (props: FetchContainerProps) => {
     }));
 
     setGraphData(data2021);
-  }, [isLoading, data]);
+  }, [isLoading, data, error]);
 
-  if (isLoading) return 'Loading...';
+  if (isLoading) return <LoadingFallback />;
+  if (error || (data && 'message' in data)) return <ErrorFallback />;
   //! REAL DATA
 
   return (
@@ -69,14 +71,8 @@ const FetchContainer = (props: FetchContainerProps) => {
           >
             {getTitle(pathname)}
           </styled.h3>
-          <styled.p className={cardRecipe.description}></styled.p>
         </styled.div>
         <styled.div className={cardRecipe.body}>
-          {/* {displayedData.map((d) => (
-            <styled.div key={d.name}>
-              {d.name}: {d.value}
-            </styled.div>
-          ))} */}
           <BarGraph graphData={graphData} />
         </styled.div>
       </styled.div>
