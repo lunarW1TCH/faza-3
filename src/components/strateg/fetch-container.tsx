@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import useSWR from 'swr';
 import { fetcher, voivodeships } from '~/lib/api';
 import { styled, VStack } from '~panda/jsx';
-import { card } from '~panda/recipes';
+import { card, link } from '~panda/recipes';
 
 import LoadingFallback from '../loading-fallback';
 import BarGraph from './bar-graph';
@@ -81,6 +81,9 @@ const FetchContainer = (props: FetchContainerProps) => {
           <BarGraph graphData={graphData} />
         </styled.div>
       </styled.div>
+      <styled.span fontSize='10px' color='accent.text'>
+        Źródło: <styled.a className={link()}>strateg.stat.gov.pl</styled.a>
+      </styled.span>
     </VStack>
   );
 };
