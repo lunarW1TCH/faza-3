@@ -1,10 +1,10 @@
 'use client';
 
-import { css } from '~panda/css';
 import { styled } from '~panda/jsx';
 
 import BarItem from './bar-item';
 import BarLines from './bar-lines';
+import BarYAxis from './bar-y-axis';
 
 import type { GraphData } from './fetch-container';
 const BarGraph = (props: BarGraphProps) => {
@@ -14,7 +14,7 @@ const BarGraph = (props: BarGraphProps) => {
     <styled.div
       w='480px'
       smDown={{
-        maxW: '350px',
+        maxW: '320px',
       }}
       h='600px'
       border='1px solid'
@@ -32,6 +32,7 @@ const BarGraph = (props: BarGraphProps) => {
         position='relative'
       >
         <BarLines />
+        <BarYAxis />
         {graphData.map((d) => (
           <BarItem key={d.name} name={d.name} value={d.value} />
         ))}

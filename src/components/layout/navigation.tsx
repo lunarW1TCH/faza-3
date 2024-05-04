@@ -24,6 +24,9 @@ const Navigation = () => {
         fontWeight='light'
         asChild
         variant='ghost'
+        _active={{
+          bgColor: 'accent.5',
+        }}
       >
         <NextLink style={{ textAlign: 'center' }} href='/'>
           <Home />
@@ -35,6 +38,9 @@ const Navigation = () => {
         fontWeight='light'
         asChild
         variant='ghost'
+        _active={{
+          bgColor: 'accent.5',
+        }}
       >
         <NextLink href='/indicator-1'>Wskaźnik 1</NextLink>
       </Button>
@@ -44,6 +50,9 @@ const Navigation = () => {
         fontWeight='light'
         asChild
         variant='ghost'
+        _active={{
+          bgColor: 'accent.5',
+        }}
       >
         <NextLink href='/indicator-2'>Wskaźnik 2</NextLink>
       </Button>
@@ -53,6 +62,9 @@ const Navigation = () => {
         fontWeight='light'
         asChild
         variant='ghost'
+        _active={{
+          bgColor: 'accent.5',
+        }}
       >
         <NextLink href='/indicator-3'>Wskaźnik 3</NextLink>
       </Button>
@@ -62,6 +74,9 @@ const Navigation = () => {
         fontWeight='light'
         asChild
         variant='ghost'
+        _active={{
+          bgColor: 'accent.5',
+        }}
       >
         <NextLink href='/klient'>Klient</NextLink>
       </Button>

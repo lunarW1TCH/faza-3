@@ -54,20 +54,25 @@ const FetchContainer = (props: FetchContainerProps) => {
   //! REAL DATA
 
   return (
-    <VStack>
+    <VStack my='4'>
       <styled.div
         className={cardRecipe.root}
-        minW='300px'
-        maxW='530px'
+        minW='280px'
+        maxW='550px'
         smDown={{
-          maxW: '400px',
+          maxW: '410px',
         }}
+        display='flex'
+        flexDirection='column'
+        justifyContent='center'
+        alignItems='center'
       >
         <styled.div className={cardRecipe.header}>
           <styled.h3
             className={cardRecipe.title}
             textWrap='wrap'
             fontSize='16px'
+            ml='3'
           >
             {getTitle(pathname)}
           </styled.h3>

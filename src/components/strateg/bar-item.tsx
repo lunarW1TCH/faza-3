@@ -19,6 +19,22 @@ const BarItem = (props: BarItemProps) => {
         '& .barBg': {
           bgColor: 'accent.9',
           w: '100px',
+          smDown: {
+            w: '60px',
+          },
+        },
+        '& .barValue': {
+          display: 'flex',
+          opacity: 1,
+        },
+      }}
+      _active={{
+        '& .barBg': {
+          bgColor: 'accent.9',
+          w: '100px',
+          smDown: {
+            w: '60px',
+          },
         },
         '& .barValue': {
           display: 'flex',
@@ -50,6 +66,10 @@ const BarItem = (props: BarItemProps) => {
         textAlign='center'
         transition='opacity 0.5s, width 0.5s'
         bottom='170px'
+        fontSize='14px'
+        smDown={{
+          fontSize: '12px',
+        }}
       >
         {`${value.toString().replace('.', ',')}%`}
       </styled.span>
@@ -61,6 +81,9 @@ const BarItem = (props: BarItemProps) => {
         textAlign='start'
         w='200px'
         fontSize='14px'
+        smDown={{
+          fontSize: '12px',
+        }}
       >
         {name}
       </styled.span>
