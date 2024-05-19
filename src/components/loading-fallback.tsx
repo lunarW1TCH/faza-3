@@ -1,5 +1,6 @@
 'use client';
 
+import { warn } from 'console';
 import { LoaderPinwheel } from 'lucide-react';
 import { styled, VStack } from '~panda/jsx';
 

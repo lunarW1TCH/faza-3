@@ -1,4 +1,4 @@
-import { HStack, VStack, styled } from '~panda/jsx';
+import { HStack, styled, VStack } from '~panda/jsx';
 import { card, link } from '~panda/recipes';
 
 const Home = () => {
@@ -23,8 +23,14 @@ const Home = () => {
           </HStack>
           <HStack w='100%' justifyContent='space-between'>
             <styled.span>Faza 2:</styled.span>
-            <styled.a className={link()} textDecoration='underline'>
-              todo.vercel.app
+            <styled.a
+              href='https://faza-2.vercel.app/'
+              target='_blank'
+              rel='noreferrer noopener'
+              className={link()}
+              textDecoration='underline'
+            >
+              faza-2.vercel.app
             </styled.a>
           </HStack>
         </styled.div>
